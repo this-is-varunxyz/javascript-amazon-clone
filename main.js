@@ -28,7 +28,7 @@ let products = [
   },
 ];
 let cart = [];
-
+let value = 1;
 function productsLoader() {
   products.forEach((product) => {
     let html = `<div class="product-container">
@@ -53,19 +53,19 @@ function productsLoader() {
             $${(product.price / 100).toFixed(2)}
           </div>
 
-          <div class="product-quantity-container">
-            <select>
-              <option selected value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-            </select>
+          <div class="product-quantity-container" >
+            <select class="js-quantity">
+      <option selected value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
           </div>
 
           <div class="product-spacer"></div>
@@ -93,7 +93,11 @@ function addToCart() {
       const dataset = buttons.dataset;
 
       let exist = false;
+
       let existitem;
+
+      value = 1;
+      
 
       cart.forEach((item) => {
         if (item.name == dataset.productName) {
@@ -104,15 +108,22 @@ function addToCart() {
         }
       });
       if (exist == true) {
-        existitem.quantity++;
+        existitem.quantity += value;
       } else {
         cart.push({ name: dataset.productName, quantity });
       }
       console.log(cart);
+      totalCartQuantity();
     });
   });
+}
+function totalCartQuantity() {
+  let cartQuantity = 1;
+  cart.forEach((item) => {
+    cartQuantity += item.quantity;
+  });
+  document.querySelector(".cart-quantity").innerHTML = cartQuantity;
 }
 
 productsLoader();
 addToCart();
-
