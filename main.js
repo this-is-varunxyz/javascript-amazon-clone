@@ -97,7 +97,12 @@ function addToCart() {
       let existitem;
 
       value = 1;
-      
+      let select = document.querySelectorAll(".js-quantity");
+      select.forEach(valuefromselect => {
+        value=Number(valuefromselect.value);
+        console.log(value);
+        
+      });
 
       cart.forEach((item) => {
         if (item.name == dataset.productName) {
@@ -118,7 +123,7 @@ function addToCart() {
   });
 }
 function totalCartQuantity() {
-  let cartQuantity = 1;
+  let cartQuantity = 0;
   cart.forEach((item) => {
     cartQuantity += item.quantity;
   });
