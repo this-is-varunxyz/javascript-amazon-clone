@@ -28,7 +28,7 @@ let products = [
   },
 ];
 let cart = [];
-let value = 1;
+
 function productsLoader() {
   products.forEach((product) => {
     let html = `<div class="product-container">
@@ -54,7 +54,7 @@ function productsLoader() {
           </div>
 
           <div class="product-quantity-container" >
-            <select class="js-quantity">
+            <select class="js-quantity" data-product-name="${product.name}" >
       <option selected value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
@@ -93,16 +93,17 @@ function addToCart() {
       const dataset = buttons.dataset;
 
       let exist = false;
+      productName = buttons.dataset.productName;
+
 
       let existitem;
 
-      value = 1;
-      let select = document.querySelectorAll(".js-quantity");
-      select.forEach(valuefromselect => {
-        value=Number(valuefromselect.value);
-        console.log(value);
-        
-      });
+     
+        let quantitySelect = Number(document.querySelector(`.js-quantity[data-product-name="${productName}"]`).value);
+      console.log(quantitySelect)
+      
+
+     
 
       cart.forEach((item) => {
         if (item.name == dataset.productName) {
@@ -113,9 +114,9 @@ function addToCart() {
         }
       });
       if (exist == true) {
-        existitem.quantity += value;
+        existitem.quantity += quantitySelect;
       } else {
-        cart.push({ name: dataset.productName, quantity });
+        cart.push({ name: dataset.productName, quantity: quantitySelect});
       }
       console.log(cart);
       totalCartQuantity();
