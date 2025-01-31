@@ -1,34 +1,5 @@
-let products = [
-  {
-    name: "Black and Gray Athletic Cotton Socks - 6 Pairs",
-    price: 1090,
-    image: "images/products/athletic-cotton-socks-6-pairs.jpg",
-    rating: {
-      stars: 4.5,
-      count: 87,
-    },
-  },
-  {
-    name: "Intermediate Size Basketball",
-    price: 2095,
-    image: "images/products/intermediate-composite-basketball.jpg",
-    rating: {
-      stars: 4.0,
-      count: 127,
-    },
-  },
-  {
-    name: " Adults Plain Cotton T-Shirt - 2 Pack",
-    price: 799,
-    image: "images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg",
-    rating: {
-      stars: 4.5,
-      count: 56,
-    },
-  },
-];
-let cart = [];
-
+import { products } from "./products.js";
+import {addToCart,cart,totalCartQuantity} from './cart.js';
 function productsLoader() {
   products.forEach((product) => {
     let html = `<div class="product-container">
@@ -84,51 +55,6 @@ function productsLoader() {
 
     document.querySelector(".products-grid").innerHTML += html;
   });
-}
-function addToCart() {
-  let btn = document.querySelectorAll(".add-to-cart-button");
-  btn.forEach((buttons) => {
-    buttons.addEventListener("click", () => {
-      let quantity = 1;
-      const dataset = buttons.dataset;
-
-      let exist = false;
-      productName = buttons.dataset.productName;
-
-
-      let existitem;
-
-     
-        let quantitySelect = Number(document.querySelector(`.js-quantity[data-product-name="${productName}"]`).value);
-      console.log(quantitySelect)
-      
-
-     
-
-      cart.forEach((item) => {
-        if (item.name == dataset.productName) {
-          exist = true;
-          existitem = item;
-
-          return;
-        }
-      });
-      if (exist == true) {
-        existitem.quantity += quantitySelect;
-      } else {
-        cart.push({ name: dataset.productName, quantity: quantitySelect});
-      }
-      console.log(cart);
-      totalCartQuantity();
-    });
-  });
-}
-function totalCartQuantity() {
-  let cartQuantity = 0;
-  cart.forEach((item) => {
-    cartQuantity += item.quantity;
-  });
-  document.querySelector(".cart-quantity").innerHTML = cartQuantity;
 }
 
 productsLoader();
