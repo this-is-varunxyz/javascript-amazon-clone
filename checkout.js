@@ -8,7 +8,7 @@ function itemsofcart(){
         if(product.name==cartItem.name){
             
             checkoutAddToCart(product,cartItem);
-            console.log(cartItem.quantity);
+            
             
         }
         
@@ -49,7 +49,7 @@ function checkoutAddToCart(product,cartItem){
                   <span class="update-quantity-link link-primary">
                     Update
                   </span>
-                  <span class="delete-quantity-link link-primary">
+                  <span class="delete-quantity-link link-primary"; data-delete-btn="${product.name}); " >
                     Delete
                   </span>
                 </div>
@@ -107,3 +107,22 @@ function checkoutAddToCart(product,cartItem){
     document.querySelector(".order-summary").innerHTML+=html;
 
 }
+function deleteitem(){
+    let deleteBtns = document.querySelectorAll(".delete-quantity-link") 
+    
+    
+deleteBtns.forEach(deleteBtn => {
+
+    
+    
+    deleteBtn.addEventListener("click",()=>{onclickdelete(deleteBtn)});
+    
+});
+}
+function onclickdelete(deleteBtn){
+    
+let deleteProduct = deleteBtn.dataset.deleteBtn;
+console.log(deleteProduct);
+
+}
+deleteitem();
