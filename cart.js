@@ -1,3 +1,5 @@
+
+
 export let cart = JSON.parse(localStorage.getItem("cart")) || [];
 export function addToCart() {
   let btn = document.querySelectorAll(".add-to-cart-button");
@@ -28,7 +30,7 @@ export function addToCart() {
       if (exist == true) {
         existitem.quantity += quantitySelect;
       } else {
-        cart.push({ name: dataset.productName, quantity: quantitySelect });
+        cart.push({ name: dataset.productName, quantity: quantitySelect , deleveryOptionsid: '1'});
       }
       saveToStorage();
 
