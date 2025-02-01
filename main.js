@@ -1,5 +1,5 @@
 import { products } from "./products.js";
-import {addToCart,cart,totalCartQuantity} from './cart.js';
+import {addToCart} from './cart.js';
 function productsLoader() {
   products.forEach((product) => {
     let html = `<div class="product-container">

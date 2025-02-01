@@ -117,5 +117,3 @@ function onclickdelete(deleteBtn) {
   // console.log(cart);
 }
 deleteitem();
-
-// updateHeader();
