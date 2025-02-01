@@ -1,32 +1,20 @@
-import { cart } from "./cart.js";
+import { cart, removeProductFromCart} from "./cart.js";
 import { products } from "./products.js";
-let matchingitem;
 
-function itemsofcart(){
-  cart.forEach(cartItem => {
-    products.forEach(product => {
-        if(product.name==cartItem.name){
-            
-            checkoutAddToCart(product,cartItem);
-            
-            
-        }
-        
+function itemsofcart() {
+  cart.forEach((cartItem) => {
+    products.forEach((product) => {
+      if (product.name == cartItem.name) {
+        checkoutAddToCart(product, cartItem);
+      }
     });
-    
   });
-
 }
 itemsofcart();
 
-
-
-
-
-function checkoutAddToCart(product,cartItem){
-    let html = 
-    `
-     <div class="cart-item-container">
+function checkoutAddToCart(product, cartItem) {
+  let html = `
+     <div class="cart-item-container" data-product="${product.name}"  >
             <div class="delivery-date">
               Delivery date: Tuesday, June 21
             </div>
@@ -40,16 +28,20 @@ function checkoutAddToCart(product,cartItem){
                   ${product.name}
                 </div>
                 <div class="product-price">
-                  $${(product.price/100).toFixed(2)}
+                  $${(product.price / 100).toFixed(2)}
                 </div>
                 <div class="product-quantity">
                   <span>
-                    Quantity: <span class="quantity-label">${cartItem.quantity}</span>
+                    Quantity: <span class="quantity-label">${
+                      cartItem.quantity
+                    }</span>
                   </span>
                   <span class="update-quantity-link link-primary">
                     Update
                   </span>
-                  <span class="delete-quantity-link link-primary"; data-delete-btn="${product.name}); " >
+                  <span class="delete-quantity-link link-primary"; data-delete-btn="${
+                    product.name
+                  }" >
                     Delete
                   </span>
                 </div>
@@ -103,26 +95,27 @@ function checkoutAddToCart(product,cartItem){
           </div>
 
 
-    `
-    document.querySelector(".order-summary").innerHTML+=html;
-
+    `;
+  document.querySelector(".order-summary").innerHTML += html;
 }
-function deleteitem(){
-    let deleteBtns = document.querySelectorAll(".delete-quantity-link") 
-    
-    
-deleteBtns.forEach(deleteBtn => {
+function deleteitem() {
+  let deleteBtns = document.querySelectorAll(".delete-quantity-link");
 
-    
-    
-    deleteBtn.addEventListener("click",()=>{onclickdelete(deleteBtn)});
-    
-});
+  deleteBtns.forEach((deleteBtn) => {
+    deleteBtn.addEventListener("click", () => {
+      onclickdelete(deleteBtn);
+    });
+  });
 }
-function onclickdelete(deleteBtn){
-    
-let deleteProduct = deleteBtn.dataset.deleteBtn;
-console.log(deleteProduct);
+function onclickdelete(deleteBtn) {
+  let deleteProduct = deleteBtn.dataset.deleteBtn;
+  let container = document.querySelector(`[data-product="${deleteProduct}"]`);
 
+  container.remove()
+
+  removeProductFromCart(deleteProduct);
+  // console.log(cart);
 }
 deleteitem();
+
+// updateHeader();
