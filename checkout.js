@@ -1,4 +1,4 @@
-import { cart, removeProductFromCart} from "./cart.js";
+import { cart, removeProductFromCart,updatedeliverytocart} from "./cart.js";
 import { updatedeleverydates ,updateTopBarDate,deleveryOptions} from "./delevery.js";
 import { products } from "./products.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
@@ -84,3 +84,4 @@ function onclickdelete(deleteBtn) {
 }
 deleteitem();
 updateTopBarDate(dayjs()); // Just call it once, not in a forEach
+updatedeliverytocart()

@@ -69,3 +69,44 @@ export function removeProductFromCart(productName) {
 function saveToStorage() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
+export function updatedeliverytocart(){
+
+  
+cart.forEach((cartItem)=>{
+  let selectInputs = document.querySelectorAll(`.delivery-option-input`);
+  selectInputs.forEach(selectInput => {
+  selectInput.addEventListener("change",(event)=>{
+  let selectedOption = event.target;
+  
+  
+
+  if(cartItem.name==selectedOption.dataset.deliveryPname){
+    cartItem.deleveryOptionsid = selectedOption.value;
+   console.log(selectedOption.dataset.deliveryPname);
+   console.log(cart)
+   
+   
+    
+
+
+
+
+  }
+
+
+
+
+
+
+  })
+
+
+
+
+
+  });
+  
+
+
+})
+}

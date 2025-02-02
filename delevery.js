@@ -36,6 +36,7 @@ export function updatedeleverydates(dayjs, product,cart) {
                   <input type="radio" ${deleveryOption.id == cart.deleveryOptionsid? "checked":''}
                     class="delivery-option-input" 
                      data-delivery-id="${deleveryOption.id}"
+                     data-delivery-pname='${product.name}'
                     name="delivery-option-${product.name}"
                     value="${deleveryOption.id}">
                   <div>
@@ -72,9 +73,11 @@ export function updateTopBarDate(dayjs) {
   let selectInputs = document.querySelectorAll(`.delivery-option-input`);
   
   selectInputs.forEach(selectInput => {
-    selectInput.addEventListener("change", (event) => {
-      const selectedOption = event.target;
     
+    selectInput.addEventListener("change", (event) => {
+
+      const selectedOption = event.target;
+
       const cartItemContainer = selectedOption.closest('.cart-item-container');
       const deliveryDateDiv = cartItemContainer.querySelector('.delivery-date');
       
@@ -98,4 +101,3 @@ export function updateTopBarDate(dayjs) {
     });
   });
 }
-
