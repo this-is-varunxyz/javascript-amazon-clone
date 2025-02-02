@@ -1,5 +1,5 @@
 import { cart, removeProductFromCart} from "./cart.js";
-import { updatedeleverydates } from "./delevery.js";
+import { updatedeleverydates ,updateTopBarDate,deleveryOptions} from "./delevery.js";
 import { products } from "./products.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 
@@ -18,7 +18,7 @@ function checkoutAddToCart(product, cartItem) {
   let html = `
      <div class="cart-item-container" data-product="${product.name}"  >
             <div class="delivery-date">
-              Delivery date:
+              
             </div>
 
             <div class="cart-item-details-grid">
@@ -83,3 +83,4 @@ function onclickdelete(deleteBtn) {
   // console.log(cart);
 }
 deleteitem();
+updateTopBarDate(dayjs()); // Just call it once, not in a forEach
