@@ -1,4 +1,3 @@
-
 export let deleveryOptions = [
   {
     id: "1",
@@ -17,19 +16,24 @@ export let deleveryOptions = [
   },
 ];
 
-export function updatedeleverydates(dayjs,product) {
-    let html =''
+export function updatedeleverydates(dayjs, product,cart) {
+  let html = "";
+ 
+  
 
   deleveryOptions.forEach((deleveryOption) => {
     const today = dayjs;
     const deleveryDate = today.add(deleveryOption.day, "days");
     const dateformat = deleveryDate.format("dddd, MMMM D");
+
     const delveryPrice =
-      deleveryOption.price === 0 ? "Free" : `$${(deleveryOption.price/100).toFixed(2)}`;
+      deleveryOption.price === 0
+        ? "Free"
+        : `$${(deleveryOption.price / 100).toFixed(2)}`;
 
     html += `
     <div class="delivery-option">
-                  <input type="radio"
+                  <input type="radio" ${deleveryOption.id == cart.deleveryOptionsid? "checked":''}
                     class="delivery-option-input"
                     name="delivery-option-${product.name}">
                   <div>
@@ -37,17 +41,14 @@ export function updatedeleverydates(dayjs,product) {
                       ${dateformat}
                     </div>
                     <div class="delivery-option-price">
-                      ${
-                    
-                     delveryPrice
-
-
-                        } - Shipping
+                      ${delveryPrice} - Shipping
                     </div>
                   </div>
                 </div>
     
     `;
+   
+    
   });
   return html;
 }

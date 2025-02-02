@@ -18,7 +18,7 @@ function checkoutAddToCart(product, cartItem) {
   let html = `
      <div class="cart-item-container" data-product="${product.name}"  >
             <div class="delivery-date">
-              Delivery date: Tuesday, June 21
+              Delivery date:
             </div>
 
             <div class="cart-item-details-grid">
@@ -53,7 +53,7 @@ function checkoutAddToCart(product, cartItem) {
                 <div class="delivery-options-title">
                   Choose a delivery option:
                 </div>
-                ${updatedeleverydates(dayjs(),product)}                
+                ${updatedeleverydates(dayjs(),product,cartItem)}                
               </div>
             </div>
           </div>
@@ -62,6 +62,8 @@ function checkoutAddToCart(product, cartItem) {
     `;
   document.querySelector(".order-summary").innerHTML += html;
 }
+
+  
 function deleteitem() {
   let deleteBtns = document.querySelectorAll(".delete-quantity-link");
 
