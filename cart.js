@@ -1,4 +1,4 @@
-import { products } from "./products.js";
+import { totaldeliverypirces,pricesummary ,totalbeforetax} from "./price-summary.js";
 
 export let cart = JSON.parse(localStorage.getItem("cart")) || [];
 export function addToCart() {
@@ -56,10 +56,11 @@ function totalCartQuantity() {
   if (document.querySelector(".return-to-home-link-items")) {
     document.querySelector(".return-to-home-link-items").innerHTML =
       cartQuantity;
-    
   }
-  if(document.querySelector(".payment-summary-items")){
-    document.querySelector(".payment-summary-items").innerHTML = `Items (${cartQuantity}):`
+  if (document.querySelector(".payment-summary-items")) {
+    document.querySelector(
+      ".payment-summary-items"
+    ).innerHTML = `Items (${cartQuantity}):`;
   }
 }
 
@@ -73,7 +74,8 @@ export function removeProductFromCart(productName) {
   cart = newcart;
   saveToStorage();
   totalCartQuantity();
-  pricesummary()
+  pricesummary();
+  totalbeforetax();
 }
 function saveToStorage() {
   localStorage.setItem("cart", JSON.stringify(cart));
@@ -90,38 +92,11 @@ export function updatedeliverytocart() {
           console.log(selectedOption.dataset.deliveryPname);
           console.log(cart);
           saveToStorage();
+          totaldeliverypirces();
+          totalbeforetax();
         }
       });
     });
   });
 }
 
-export function pricesummary(){
-  let totalproductsprice = 0;
-
-
-let matchingproduct;
-cart.forEach(cartItem => {
-  products.forEach((product)=>{
-
-
-
-    if(cartItem.name == product.name){
-      matchingproduct=product
-
-
-    }
-
-  })
-let productsprice = Number(matchingproduct.price*cartItem.quantity)
-
-totalproductsprice+=productsprice
-
-
-
-
-
-});
-document.querySelector(".totalproductsprice").innerHTML = (`$${(totalproductsprice/100).toFixed(2)}`)
-
-}

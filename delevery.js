@@ -16,10 +16,8 @@ export let deleveryOptions = [
   },
 ];
 
-export function updatedeleverydates(dayjs, product,cart) {
+export function updatedeleverydates(dayjs, product, cart) {
   let html = "";
- 
-  
 
   deleveryOptions.forEach((deleveryOption) => {
     const today = dayjs;
@@ -33,7 +31,9 @@ export function updatedeleverydates(dayjs, product,cart) {
 
     html += `
     <div class="delivery-option">
-                  <input type="radio" ${deleveryOption.id == cart.deleveryOptionsid? "checked":''}
+                  <input type="radio" ${
+                    deleveryOption.id == cart.deleveryOptionsid ? "checked" : ""
+                  }
                     class="delivery-option-input" 
                      data-delivery-id="${deleveryOption.id}"
                      data-delivery-pname='${product.name}'
@@ -50,12 +50,8 @@ export function updatedeleverydates(dayjs, product,cart) {
                 </div>
     
     `;
-
-   
   });
-  
-  
- 
+
   return html;
 }
 // export function updateTopBarDate(dayjs) {
@@ -71,18 +67,18 @@ export function updatedeleverydates(dayjs, product,cart) {
 
 //   // Then set up event listeners for changes
 //   let selectInputs = document.querySelectorAll(`.delivery-option-input`);
-  
+
 //   selectInputs.forEach(selectInput => {
-    
+
 //     selectInput.addEventListener("change", (event) => {
 
 //       const selectedOption = event.target;
 
 //       const cartItemContainer = selectedOption.closest('.cart-item-container');
 //       const deliveryDateDiv = cartItemContainer.querySelector('.delivery-date');
-      
+
 //       const today = dayjs;
-      
+
 //       if(selectedOption.value == 1) {
 //         const deleveryDate = today.add(7, "days");
 //         const dateformat = deleveryDate.format("dddd, MMMM D");
@@ -102,3 +98,13 @@ export function updatedeleverydates(dayjs, product,cart) {
 //   });
 // }
 
+export function deliveryprice(cartItem) {
+  let matchingproduct;
+  deleveryOptions.forEach((deleveryOption) => {
+    if (deleveryOption.id == cartItem.deleveryOptionsid) {
+      matchingproduct = deleveryOption;
+    }
+  });
+  let deliveryprice=matchingproduct.price
+  return deliveryprice
+}
