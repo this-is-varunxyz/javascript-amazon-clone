@@ -58,46 +58,47 @@ export function updatedeleverydates(dayjs, product,cart) {
  
   return html;
 }
-export function updateTopBarDate(dayjs) {
-  // First set default dates for all items (7-day delivery)
-  const cartContainers = document.querySelectorAll('.cart-item-container');
-  cartContainers.forEach(container => {
-    const deliveryDateDiv = container.querySelector('.delivery-date');
-    const today = dayjs;
-    const deleveryDate = today.add(7, "days");
-    const dateformat = deleveryDate.format("dddd, MMMM D");
-    deliveryDateDiv.innerHTML = `Delivery date: ${dateformat}`;
-  });
+// export function updateTopBarDate(dayjs) {
+//   // First set default dates for all items (7-day delivery)
+//   const cartContainers = document.querySelectorAll('.cart-item-container');
+//   cartContainers.forEach(container => {
+//     const deliveryDateDiv = container.querySelector('.delivery-date');
+//     const today = dayjs;
+//     const deleveryDate = today.add(7, "days");
+//     const dateformat = deleveryDate.format("dddd, MMMM D");
+//     deliveryDateDiv.innerHTML = `Delivery date: ${dateformat}`;
+//   });
 
-  // Then set up event listeners for changes
-  let selectInputs = document.querySelectorAll(`.delivery-option-input`);
+//   // Then set up event listeners for changes
+//   let selectInputs = document.querySelectorAll(`.delivery-option-input`);
   
-  selectInputs.forEach(selectInput => {
+//   selectInputs.forEach(selectInput => {
     
-    selectInput.addEventListener("change", (event) => {
+//     selectInput.addEventListener("change", (event) => {
 
-      const selectedOption = event.target;
+//       const selectedOption = event.target;
 
-      const cartItemContainer = selectedOption.closest('.cart-item-container');
-      const deliveryDateDiv = cartItemContainer.querySelector('.delivery-date');
+//       const cartItemContainer = selectedOption.closest('.cart-item-container');
+//       const deliveryDateDiv = cartItemContainer.querySelector('.delivery-date');
       
-      const today = dayjs;
+//       const today = dayjs;
       
-      if(selectedOption.value == 1) {
-        const deleveryDate = today.add(7, "days");
-        const dateformat = deleveryDate.format("dddd, MMMM D");
-        deliveryDateDiv.innerHTML = `Delivery date: ${dateformat}`;
-      }
-      if(selectedOption.value == 2) {
-        const deleveryDate = today.add(3, "days");
-        const dateformat = deleveryDate.format("dddd, MMMM D");
-        deliveryDateDiv.innerHTML = `Delivery date: ${dateformat}`;
-      }
-      if(selectedOption.value == 3) {
-        const deleveryDate = today.add(1, "days");
-        const dateformat = deleveryDate.format("dddd, MMMM D");
-        deliveryDateDiv.innerHTML = `Delivery date: ${dateformat}`;
-      }
-    });
-  });
-}
+//       if(selectedOption.value == 1) {
+//         const deleveryDate = today.add(7, "days");
+//         const dateformat = deleveryDate.format("dddd, MMMM D");
+//         deliveryDateDiv.innerHTML = `Delivery date: ${dateformat}`;
+//       }
+//       if(selectedOption.value == 2) {
+//         const deleveryDate = today.add(3, "days");
+//         const dateformat = deleveryDate.format("dddd, MMMM D");
+//         deliveryDateDiv.innerHTML = `Delivery date: ${dateformat}`;
+//       }
+//       if(selectedOption.value == 3) {
+//         const deleveryDate = today.add(1, "days");
+//         const dateformat = deleveryDate.format("dddd, MMMM D");
+//         deliveryDateDiv.innerHTML = `Delivery date: ${dateformat}`;
+//       }
+//     });
+//   });
+// }
+
