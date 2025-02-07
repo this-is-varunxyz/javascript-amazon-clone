@@ -3,6 +3,7 @@ import { updatedeleverydates } from "./delevery.js";
 import {pricesummary,totalbeforetax,totaldeliverypirces  } from "./price-summary.js";
 import { products } from "./products.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
+import './backendPractice.js';
 
 function itemsofcart() {
   cart.forEach((cartItem) => {
