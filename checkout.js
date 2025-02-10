@@ -1,9 +1,32 @@
-import { cart,  removeProductFromCart, updatedeliverytocart } from "./cart.js";
+import { cart, removeProductFromCart, updatedeliverytocart } from "./cart.js";
 import { updatedeleverydates } from "./delevery.js";
-import {pricesummary,totalbeforetax,totaldeliverypirces  } from "./price-summary.js";
-import { products } from "./products.js";
+import {
+  pricesummary,
+  totalbeforetax,
+  totaldeliverypirces,
+} from "./price-summary.js";
+import { products, loadproducts } from "./products.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
-import './backendPractice.js';
+import "./backendPractice.js";
+async function readycheckout() {
+  try {
+    console.log("loading products")
+    await loadproducts();
+    console.log(products)
+    itemsofcart();
+    deleteitem();
+    updatedeliverytocart();
+    pricesummary();
+    totalbeforetax();
+    totaldeliverypirces();
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+
+
 
 function itemsofcart() {
   cart.forEach((cartItem) => {
@@ -14,7 +37,6 @@ function itemsofcart() {
     });
   });
 }
-itemsofcart();
 
 function checkoutAddToCart(product, cartItem) {
   let html = `
@@ -32,7 +54,7 @@ function checkoutAddToCart(product, cartItem) {
                   ${product.name}
                 </div>
                 <div class="product-price">
-                  $${(product.price / 100).toFixed(2)}
+                  $${(product.priceCents / 100).toFixed(2)}
                 </div>
                 <div class="product-quantity">
                   <span>
@@ -55,7 +77,11 @@ function checkoutAddToCart(product, cartItem) {
                 <div class="delivery-options-title">
                   Choose a delivery option:
                 </div>
-                ${updatedeleverydates(dayjs(),product,cartItem)}                
+                ${updatedeleverydates(
+                  dayjs(),
+                  product,
+                  cartItem
+                )}                
               </div>
             </div>
           </div>
@@ -65,7 +91,6 @@ function checkoutAddToCart(product, cartItem) {
   document.querySelector(".order-summary").innerHTML += html;
 }
 
-  
 function deleteitem() {
   let deleteBtns = document.querySelectorAll(".delete-quantity-link");
 
@@ -79,15 +104,9 @@ function onclickdelete(deleteBtn) {
   let deleteProduct = deleteBtn.dataset.deleteBtn;
   let container = document.querySelector(`[data-product="${deleteProduct}"]`);
 
-  container.remove()
+  container.remove();
 
   removeProductFromCart(deleteProduct);
-  // console.log(cart);
-  totaldeliverypirces()
+  totaldeliverypirces();
 }
-deleteitem();
-// updateTopBarDate(dayjs()); // Just call it once, not in a forEach
-updatedeliverytocart();
-pricesummary();
-totalbeforetax();
-totaldeliverypirces();
+readycheckout()
